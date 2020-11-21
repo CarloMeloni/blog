@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const crypto = require('crypto')
 const { use } = require('../routes/blog')
 
-const userSchema = new.mongoose.Schema({
+const userSchema = new mongoose.Schema({
     username: {
         type: String,
         trim: true,
