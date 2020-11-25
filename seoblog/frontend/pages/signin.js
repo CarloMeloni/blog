@@ -1,16 +1,17 @@
 import Layout from '../components/Layout';
+import SigninComponent from '../components/auth/SigninComponent';
 import Link from 'next/link';
 
 const Signin = () => {
     return (
         <Layout>
-        <h2>Signin PAGE!</h2>
-        <Link href="/">
-            <a>
-                Home
-            </a>
-        </Link>
-    </Layout>
+            <h2 className="text-center">Login</h2>
+            <div className="row">
+                <div className="col-md-6 offset-md-3">
+                    <SigninComponent />
+                </div> 
+            </div>
+        </Layout>
     )
 
 }
