@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { signin } from '../../actions/auth';
+import { signin, authenticate } from '../../actions/auth';
 import Router from 'next/router'; 
 
 const SigninComponent = () => {
@@ -34,7 +34,9 @@ const SigninComponent = () => {
                     //SAVE USER TOKEN TO COOKIE
                     //SAVE USER INFO TO LOCALSTORAGE
                     //AUTHENTICATE USER
-                    Router.push('/')
+                    authenticate(data, () => {
+                        Router.push('/');
+                    })
                 }
             }) 
     }

@@ -6,12 +6,12 @@ const index = () => {
         <Layout>
         <h2>iNDEX PAGE!</h2>
         <Link href="/signup">
-            <a>
+            <a style={{ padding: "20px" }}>
                 Registrati
             </a>
         </Link>
         <Link href="/signin">
-            <a>
+            <a style={{ padding: "20px" }}>
                 Login
             </a>
         </Link>

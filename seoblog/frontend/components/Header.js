@@ -48,7 +48,7 @@ const Header = (props) => {
             </NavItem>
             
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
+          <NavbarText>THE-BLOG</NavbarText>
         </Collapse>
       </Navbar>
     </div>
