@@ -34,32 +34,48 @@ const Header = (props) => {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            {!isAuth() && (
+          </Nav>
+          {!isAuth() && (
               <>
-                <NavItem>
+                
                 <Link href="/signin">
                     <NavLink style={{ cursor: "pointer" }}>
                         Login
                     </NavLink>
                 </Link>
-              </NavItem>
-              <NavItem>
+              
+              
                   <Link href="/signup">
                   <NavLink style={{ cursor: "pointer" }}>
                         Registrati
                     </NavLink>
                   </Link>
-              </NavItem>
+              
             </>
             )}
-            {isAuth() && (
-              <NavItem>
+            {isAuth() && isAuth().role === 0 && (
+              
+                <NavLink>
+                  <Link href='/user'>
+                    {`${isAuth().name}, la tua Dashboard.`}
+                  </Link>
+                </NavLink>
+              
+            )}
+            {isAuth() && isAuth().role === 1 && (
+              
+                <NavLink>
+                  <Link href='/admin'>
+                    {`${isAuth().name}, la tua Dashboard.`}
+                  </Link>
+                </NavLink>
+              
+            )}
+          {isAuth() && (
                 <NavLink style={{ cursor: "pointer" }} onClick={() =>  signout(() => Router.replace('/signin')) }>
                       Logout
                 </NavLink>
-              </NavItem>
             )}
-          </Nav>
           <NavbarText>THE-BLOG</NavbarText>
         </Collapse>
       </Navbar>
