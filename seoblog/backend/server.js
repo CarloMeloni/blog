@@ -9,6 +9,7 @@ require('dotenv').config()
 //BRING ROUTES
 const blogRoutes = require('./routes/blog')
 const authRoutes = require('./routes/auth')
+const userRoutes = require('./routes/user')
 
 //APP
 const app = express()
@@ -28,6 +29,7 @@ if(process.env.NODE_ENV === 'development') {
 //ROUTES MIDDLEWARE
 app.use('/api', blogRoutes)
 app.use('/api', authRoutes)
+app.use('/api', userRoutes)
 
 //ROUTES
 app.get('/api', (req, res) => {

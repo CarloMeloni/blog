@@ -13,7 +13,7 @@ router.post('/signout', signout);
 //TEST
 router.get('/secret', requireSignin, (req, res) => {
     res.json({
-        message:" You have access csecret"
+        user: req.user
     })
 })
 
