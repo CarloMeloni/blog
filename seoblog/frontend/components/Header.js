@@ -18,7 +18,7 @@ import {
   DropdownItem,
   NavbarText
 } from 'reactstrap';
-import nProgress from 'nprogress';
+import '../node_modules/nprogress/nprogress.css';
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
