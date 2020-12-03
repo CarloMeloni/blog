@@ -15,7 +15,7 @@ const AdminIndex = () => {
                         <ul className="list-group">
                             <li className="list-group-item">
                                 <Link href="/admin/crud/category-tag">
-                                    <a>Create Category</a>
+                                    <a>Crea Categoria</a>
                                 </Link>
                             </li>
                         </ul>
