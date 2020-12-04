@@ -17,16 +17,39 @@ exports.create = (req, res) => {
                 error: "L'immagine non puo' essere caricata."
             });
         }
+
         const { title, body, categories, tags } = fields;
+
+        if(!title || !title.length) {
+            return res.status(400).json({
+                error: "Il titolo e' richiesto."
+            });
+        }
+
+        if(!body || body.length < 200) {
+            return res.status(400).json({
+                error: "Articolo troppo corto."
+            });
+        }
+
+        if(!categories || categories.length === 0) {
+            return res.status(400).json({
+                error: "Applica almeno una categoria."
+            });
+        }
+
+        if(!tags || tags.length === 0) {
+            return res.status(400).json({
+                error: "Applica almeno un tag."
+            });
+        }
 
         let blog = new Blog();
         blog.title = title;
         blog.body = body;
         blog.slug = slugify(title).toLowerCase();
-        blog.categories = categories;
-        blog.tags = tags;
         blog.mtitle = `${title} | ${process.env.APP_NAME}`;
-        blog.mdescription = stripHtml(body.substring(0, 160));
+        blog.mdesc = stripHtml(body.substring(0, 160));
         blog.postedBy = req.user._id;
 
         if(files.photo) {
@@ -40,6 +63,7 @@ exports.create = (req, res) => {
         }
 
         blog.save((err, result) => {
+            console.log("errrrrrr", err)
             if(err) {
                 return res.status(400).json({
                     error: errorHandler(err)
@@ -47,5 +71,5 @@ exports.create = (req, res) => {
             }
             res.json(result);
         })
-    })
+    });
 }

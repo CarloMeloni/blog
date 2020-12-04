@@ -29,8 +29,8 @@ const blogSchema = new mongoose.Schema({
     mtitle: {
         type: String,
     },
-    mdescription: {
-        type: String,
+    mdesc: {
+        type: {},
     },
     photo: {
         data: Buffer,
