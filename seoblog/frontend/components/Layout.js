@@ -6,7 +6,9 @@ const Layout = ({ children }) => {
         <React.Fragment>
             <Header />
                 {children}
-            <p>FOOTER</p>
+            <div style={{ border: "1px solid black", display: "flex" }} className="col-md-12 mt-5">
+                <p>FOOTER</p>
+            </div>
         </React.Fragment>
     )
 }
