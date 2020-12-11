@@ -25,6 +25,8 @@ const BlogCreate = ({ router }) => {
 
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
+    const [checkedCategories, setCheckedCategories] = useState([]);
+    const [checkedTags, setCheckedTags] = useState([]);
     const [body, setBody] = useState(blogFromLs());
     const [values, setValues] = useState({
         error: '',
@@ -86,11 +88,41 @@ const BlogCreate = ({ router }) => {
         }
     }
 
+    const handleToggle = (cat) => () => {
+        setValues({ ...values, error: '' });
+        const clickedCategory = checkedCategories.indexOf(cat);
+        const all = [...checkedCategories];
+        if(clickedCategory === -1) {
+            all.push(cat);
+        } else {
+            all.splice(clickedCategory, 1);
+        }
+
+        console.log(all);
+        setCheckedCategories(all);
+        formData.set('categories', all);
+    }
+
+    const handleToggleTag = (tag) => () => {
+        setValues({ ...values, error: '' });
+        const clickedTag = checkedTags.indexOf(tag);
+        const all = [...checkedTags];
+        if(clickedTag === -1) {
+            all.push(tag);
+        } else {
+            all.splice(clickedTag, 1);
+        }
+
+        console.log(all);
+        setCheckedTags(all);
+        formData.set('tags', all);
+    }
+
     const showCategories = () => {
         return (
             categories && categories.map((cat, i) => (
                 <li key={i} className="list-unstyled">
-                    <input type="checkbox" className="mr-2" />
+                    <input onChange={handleToggle(cat._id)} type="checkbox" className="mr-2" />
                     <label className="form-check-label">{cat.name}</label>
                 </li>
             ))
@@ -101,7 +133,7 @@ const BlogCreate = ({ router }) => {
         return (
             tags && tags.map((tag, i) => (
                 <li key={i} className="list-unstyled">
-                    <input type="checkbox" className="mr-2" />
+                    <input onChange={handleToggleTag(tag._id)} type="checkbox" className="mr-2" />
                     <label className="form-check-label">{tag.name}</label>
                 </li>
             ))
