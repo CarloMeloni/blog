@@ -38,6 +38,7 @@ const BlogCreate = ({ router }) => {
     });
 
     const { error, sizeError, success, formData, title, hidePublishButton } = values;
+    const token = getCookie('token');
 
     useEffect(() => {
         setValues({ ...values, formData: new FormData(),  });
@@ -69,7 +70,18 @@ const BlogCreate = ({ router }) => {
     
     const publishBlog = (e) => {
         e.preventDefault();
-        console.log('ready to publish blog!')
+        //console.log('ready to publish blog!')
+        createBlog(formData, token)
+            .then(data => {
+                if(data.error) {
+                    setValues({ ...values, error: data.error });
+                } else {
+                    setValues({ ...values, title: '', error: '', success: `l'articolo "${data.title}" e' stato creato.` });
+                    setBody('');
+                    setCategories([]);
+                    setTags([]);
+                }
+            })
     };
 
     const handleChange = name => e => {
@@ -153,7 +165,7 @@ const BlogCreate = ({ router }) => {
                         modules={CreateBlog.modules} 
                         formats={CreateBlog.formats} 
                         value={body} 
-                        placeholder="Scrivi qualcosa di brutto..." 
+                        placeholder="Scrivi qualcosa..." 
                         onChange={handleBody} />
                 </div>
 
@@ -180,6 +192,16 @@ const BlogCreate = ({ router }) => {
                     {JSON.stringify(tags)}
                 </div>
                 <div class="col-4">
+                    <div>
+                        <div className="form-group pb-2">
+                            <h5>Photo</h5>
+                            <hr/>
+                            <small className="text-muted">Dimensioni max: 1mb</small>
+                            <label className="btn btn-outline-info m-3">Carica Immagine
+                                <input onChange={handleChange('photo')} type="file" accept="image/*" hidden />
+                            </label>
+                        </div>
+                    </div>
                     <div>
                         <h5>Categorie</h5>
                         <hr/>

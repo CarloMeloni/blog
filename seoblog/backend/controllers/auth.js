@@ -34,7 +34,7 @@ exports.signin = (req, res) => {
     User.findOne({ email }).exec(( err, user ) => {
         if(err || !user) {
             return res.status(400).json({
-                error: "Questa Email non e' presente nel nostro Database, per piacere Registrati."
+                error: "Questa Email non e' presente nel nostro Database, per piacere registrati."
             })
         }
 
