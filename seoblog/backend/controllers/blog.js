@@ -114,7 +114,7 @@ exports.list = (req, res) => {
         .exec((err, data) => {
             if(err) {
                 return res.json({
-                    error: errorHandler
+                    error: errorHandler(err)
                 })
             }
 
@@ -124,7 +124,51 @@ exports.list = (req, res) => {
 }
 
 exports.listAllBlogCategoriesTags = (req, res) => {
-    
+    let limit = req.body.limit ? parseInt(req.body.limit) : 10;
+    let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+
+    let blogs, categories, tags;
+
+    Blog.find({})
+        .populate('categories', '_id name slug')
+        .populate('tags', '_id name slug')
+        .sort({createdAt: -1})
+        .skip(skip)
+        .limit(limit)
+        .select('_id title excerpt categories tags postedBy createdAt updatedAt')
+        .exec((err, data) => {
+            if(err) {
+                return res.json({
+                    error: errorHandler(err)
+                });
+            };
+
+            blogs = data; //ALL ARTICLES
+            // GET CATEGORIES
+            Category.find({}).exec((err, cat) => {
+                if(err) {
+                    return res.json({
+                        error: errorHandler(err)
+                    });
+                }
+
+                categories = cat; // ALL CATEGORIES
+            });
+
+            // GET TAGS
+            Tag.find({}).exec((err, t) => {
+                if(err) {
+                    return res.json({
+                        error: errorHandler(err)
+                    });
+                }
+
+                tags = t; // ALL TAGS
+
+                //RETURN ALL CATEGORIES AND TAGS
+                res.json({ blogs, categories, tags, size: blogs.length })
+            });
+        });
 }
 
 exports.read = (req, res) => {
