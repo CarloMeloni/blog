@@ -4,15 +4,51 @@ import Link from 'next/link';
 import Layout from '../../components/Layout';
 import {listBlogsWithCategoriesAndTags} from '../../actions/blog';
 import {API} from '../../config';
+import renderHtml from 'react-render-html';
+import moment from 'moment';
 
-const Blogs = () => {
+
+const Blogs = ({blogs, categories, tags, size}) => {
+    const showAllBlogs = () => {
+        return blogs.map((blog, idx) => {
+             return (<article key={idx}>
+                <div className="lead pb-4">
+                    <header>
+                        <Link href={`/blog/${blog.slug}`}>
+                            <a><h2 className="pt-3 pb-3 font-weight-bold">{blog.title}</h2></a>
+                        </Link>
+                    </header>
+                    <section>
+                        <p className="mark pt-2 pb-2">
+                            Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')}
+                        </p>
+                    </section>
+                    <section>
+                        <p>Categorie e tag dell'articolo</p>
+                    </section>
+                    <div className="row">
+                        <div className="col-md-4">image</div>
+                        <div className="col-md-8">
+                            <section>
+                                <div className="pb-3">{blog.excerpt == undefined ? '' : renderHtml(blog.excerpt)}</div>
+                                <Link href={`/blog/${blog.slug}`}>
+                                    <a className="btn btn-primary pt-2">Leggi l'articolo</a>
+                                </Link>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+            </article>)
+        });
+    }
     return (
         <Layout>
             <main>
                 <div className="container-fluid">
                     <header>
                         <div className="col-md-12 pt-3">
-                            <h1 className="display-4 font-weight-bold text-center">Articolo a caso</h1>
+                            <h1 className="display-4 font-weight-bold text-center">Articoli</h1>
                         </div>
                         <section>
                             <p>Categorie e tag</p>
@@ -22,13 +58,28 @@ const Blogs = () => {
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-12">
-                            Mostra tutti gli articoli
+                            {showAllBlogs()}
                         </div>
                     </div>
                 </div>
             </main>
         </Layout>
     )
+};
+
+Blogs.getInitialProps = () => {
+    return listBlogsWithCategoriesAndTags().then(data => {
+        if(data.error) {
+            console.log(data.error);
+        } else {
+            return {
+                blogs: data.blogs,
+                categories: data.categories,
+                tags: data.tags,
+                size: data.size
+            };
+        }
+    });
 }
 
 export default Blogs;
