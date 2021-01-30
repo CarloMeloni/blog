@@ -41,41 +41,38 @@ const Header = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
           </Nav>
+                <Link href="/blogs">
+                    <NavLink style={{ cursor: "pointer" }}>
+                        Articoli
+                    </NavLink>
+                </Link>
           {!isAuth() && (
               <>
-                
                 <Link href="/signin">
                     <NavLink style={{ cursor: "pointer" }}>
                         Login
                     </NavLink>
                 </Link>
-              
-              
                   <Link href="/signup">
                   <NavLink style={{ cursor: "pointer" }}>
                         Registrati
                     </NavLink>
                   </Link>
-              
-            </>
+              </>
             )}
             {isAuth() && isAuth().role === 0 && (
-              
                 <NavLink>
                   <Link href='/user'>
                     {`${isAuth().name}, la tua Dashboard.`}
                   </Link>
                 </NavLink>
-              
             )}
             {isAuth() && isAuth().role === 1 && (
-              
                 <NavLink>
                   <Link href='/admin'>
                     {`${isAuth().name}, la tua Dashboard.`}
                   </Link>
                 </NavLink>
-              
             )}
           {isAuth() && (
                 <NavLink style={{ cursor: "pointer" }} onClick={() =>  signout(() => Router.replace('/signin')) }>
