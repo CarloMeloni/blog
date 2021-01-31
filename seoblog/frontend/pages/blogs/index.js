@@ -1,12 +1,30 @@
 import {useState} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import {withRouter} from 'next/router';
 import Layout from '../../components/Layout';
 import {listBlogsWithCategoriesAndTags} from '../../actions/blog';
 import Card from '../../components/blog/Card';
+import {API, DOMAIN, APP_NAME} from '../../config';
 
 
-const Blogs = ({blogs, categories, tags, size}) => {
+const Blogs = ({blogs, categories, tags, size, router}) => {
+
+    const showHead = () => (
+        <Head>
+            <title>THE BLOG | {APP_NAME}</title>
+            <meta name="description" content="Blog contenuti tecnologia satira costume arte italian" />
+            <link rel="canonical" href={`${DOMAIN}${router.pathname}`} />
+            <meta property="og:title" content={`Questo blog puo' contenere tecnologia, satira, costume, arte, coloranti e conservanti | ${APP_NAME}`} />
+            <meta property="og:description" content="Blog contenuti tecnologia satira costume arte italian" />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content={`${DOMAIN}${router.pathname}`} />
+            <meta property="og:site_name" content={APP_NAME} />
+            <meta property="og:image" content={`${DOMAIN}/static/images/seoblog.jpg`} />
+            <meta property="og:image:secure_url" content={`${DOMAIN}/static/images/seoblog.jpg`} />
+            <meta property="og:image:type" content="image/jpg" />
+        </Head>
+    );
 
     const showAllBlogs = () => {
         return blogs.map((blog, idx) => {
@@ -39,6 +57,8 @@ const Blogs = ({blogs, categories, tags, size}) => {
     };
     
     return (
+        <>
+        {showHead()}
         <Layout>
             <main>
                 <div className="container-fluid">
@@ -64,6 +84,7 @@ const Blogs = ({blogs, categories, tags, size}) => {
                 </div>
             </main>
         </Layout>
+        </>
     )
 };
 
@@ -82,4 +103,4 @@ Blogs.getInitialProps = () => {
     });
 }
 
-export default Blogs;
+export default withRouter(Blogs);
