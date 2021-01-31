@@ -1,13 +1,30 @@
 import {useState} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import {withRouter} from 'next/router';
 import Layout from '../../components/Layout';
 import {singleBlog} from '../../actions/blog';
 import {API, DOMAIN, APP_NAME} from '../../config';
 import renderHtml from 'react-render-html';
 import moment from 'moment';
 
-const SingleBlog = ({blog}) => {
+const SingleBlog = ({blog, query}) => {
+    const showHead = () => (
+        <Head>
+            <title>{blog.title} | {APP_NAME}</title>
+            <meta name="description" content={blog.mdesc} />
+            <link rel="canonical" href={`${DOMAIN}/blogs/${query.slug}`} />
+            <meta property="og:title" content={`{blog.title} ${APP_NAME}`} />
+            <meta property="og:description" content={blog.mdesc} />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content={`${DOMAIN}/blogs/${query.slug}`} />
+            <meta property="og:site_name" content={APP_NAME} />
+            <meta property="og:image" content={`${API}/blog/photo/${blog.slug}`} />
+            <meta property="og:image:secure_url" content={`${API}/blog/photo/${blog.slug}`} />
+            <meta property="og:image:type" content="image/jpg" />
+        </Head>
+    );
+
     const showBlogCategories = (blog) => {
         return blog.categories.map((cat, idx) => (
             <Link key={idx} href={`/categories/${cat.slug}`}>
@@ -26,26 +43,32 @@ const SingleBlog = ({blog}) => {
 
     return (
         <>
+            {showHead()}
             <Layout>
                 <main>
                     <article>
                         <div className="container-fluid">
-                            <section>
-                                <div className="row" style={{marginTop: "-30px"}}>
-                                    <img src={`${API}/blog/photo/${blog.slug}`} alt={blog.title} className="img img-fluid" style={{width: "100%", maxHeight: "500px", objectFit: "cover"}} />
-                                </div>
-                            </section>
-                            <section>
-                                <p className="lead mt-3 mark">
-                                    Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')} alle {moment(blog.updatedAt).format('HH:mm')}
-                                </p>
-                                <div className="pb-3">
-                                    {showBlogCategories(blog)}
-                                    {showBlogTags(blog)}
-                                    <br />
-                                    <br />
+                            
+                                <section>
+                                        <div className="row" style={{marginTop: "-30px"}}>
+                                            <img src={`${API}/blog/photo/${blog.slug}`} alt={blog.title} className="img img-fluid" style={{width: "100%", maxHeight: "500px", objectFit: "cover"}} />
+                                        </div>
+                                </section>
+                                <section>
+                                    <div className="container">
+                                        <h1 className="display-2 pb-3 pt-3 text-center font-weight-bold">{blog.title}</h1>
+                                        <p className="lead mt-3 font-weight-bold">
+                                            Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')} alle {moment(blog.updatedAt).format('HH:mm')}
+                                        </p>
+                                        <div className="pb-3">
+                                            {showBlogCategories(blog)}
+                                            {showBlogTags(blog)}
+                                            <br />
+                                            <br />
+                                            </div>
                                     </div>
-                            </section>
+                                </section>
+                            
                         </div>
 
                         <div className="container">
@@ -76,9 +99,9 @@ SingleBlog.getInitialProps = ({query}) => {
             if(data.error) {
                 console.log(data.error);
             } else {
-                return {blog: data}
+                return {blog: data, query}
             }
         })
 };
 
-export default SingleBlog;
+export default withRouter(SingleBlog);

@@ -29,7 +29,7 @@ const Card = ({blog}) => {
                     </Link>
                 </header>
                 <section>
-                    <p className="mark pt-2 pb-2">
+                    <p className="font-weight-bold pt-2 pb-2">
                         Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')} alle {moment(blog.updatedAt).format('HH:mm')}
                     </p>
                 </section>

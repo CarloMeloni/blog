@@ -4,11 +4,14 @@ import Header from './Header';
 const Layout = ({ children }) => {
     return (
         <React.Fragment>
+            <div style={{backgroundColor: '#ccc'}}>
             <Header />
                 {children}
-            <div style={{ border: "1px solid black" }} className="col-md-12 mt-5">
+            </div>
+            <div style={{ }} className="col-md-12">
                 <p className="display-3 text-center">BLOG</p>
             </div>
+            
         </React.Fragment>
     )
 }

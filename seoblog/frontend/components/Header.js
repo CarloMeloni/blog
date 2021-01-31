@@ -61,8 +61,8 @@ const Header = (props) => {
               </>
             )}
             {isAuth() && isAuth().role === 0 && (
-                <NavLink style={{ cursor: "pointer", color: "#fff" }}>
-                  <Link href='/user'>
+                <NavLink>
+                  <Link style={{ cursor: "pointer", color: "#fff" }} href='/user'>
                     {`${isAuth().name}, la tua Dashboard`}
                   </Link>
                 </NavLink>
