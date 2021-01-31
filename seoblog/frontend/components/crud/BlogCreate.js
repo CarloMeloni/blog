@@ -188,14 +188,14 @@ const BlogCreate = ({ router }) => {
     return (
         <div className="container-fluid pb-5">
             <div className="row">
-                <div class="col-8">
+                <div className="col-8">
                     {createBlogForm()}
                     <div className="pt-3">
                         {showError()}
                         {showSuccess()}
                     </div>
                 </div>
-                <div class="col-4">
+                <div className="col-4">
                     <div>
                         <div className="form-group pb-2">
                             <h5>Photo</h5>

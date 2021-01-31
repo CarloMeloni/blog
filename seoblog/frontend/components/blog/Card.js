@@ -44,7 +44,7 @@ const Card = ({blog}) => {
                         <section>
                             <img 
                                 className="img img-fluid" 
-                                style={{maxHeight: "150px", width: "auto"}} 
+                                style={{maxHeight: "250px", width: "auto"}} 
                                 src={`${API}/blog/photo/${blog.slug}`} 
                                 alt={blog.title} />
                         </section>
@@ -52,7 +52,7 @@ const Card = ({blog}) => {
                     <div className="col-md-8">
                         <section>
                             <div className="pb-3">{blog.excerpt == undefined ? '' : renderHtml(blog.excerpt)}</div>
-                            <Link href={`/blog/${blog.slug}`}>
+                            <Link href={`/blogs/${blog.slug}`}>
                                 <a className="btn btn-primary pt-2">Leggi l'articolo</a>
                             </Link>
                         </section>

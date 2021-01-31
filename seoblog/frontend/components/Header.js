@@ -31,9 +31,9 @@ const Header = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="dark" light expand="md">
         <Link href="/">
-            <NavLink className="font-weight-bold">
+            <NavLink style={{ cursor: "pointer", color: "#fff" }} className="font-weight-bold">
                 {APP_NAME}
             </NavLink>
         </Link>
@@ -42,28 +42,28 @@ const Header = (props) => {
           <Nav className="mr-auto" navbar>
           </Nav>
                 <Link href="/blogs">
-                    <NavLink style={{ cursor: "pointer" }}>
+                    <NavLink style={{ cursor: "pointer", color: "#fff" }}>
                         Articoli
                     </NavLink>
                 </Link>
           {!isAuth() && (
               <>
                 <Link href="/signin">
-                    <NavLink style={{ cursor: "pointer" }}>
+                    <NavLink style={{ cursor: "pointer", color: "#fff" }}>
                         Login
                     </NavLink>
                 </Link>
                   <Link href="/signup">
-                  <NavLink style={{ cursor: "pointer" }}>
+                  <NavLink style={{ cursor: "pointer", color: "#fff" }}>
                         Registrati
                     </NavLink>
                   </Link>
               </>
             )}
             {isAuth() && isAuth().role === 0 && (
-                <NavLink>
+                <NavLink style={{ cursor: "pointer", color: "#fff" }}>
                   <Link href='/user'>
-                    {`${isAuth().name}, la tua Dashboard.`}
+                    {`${isAuth().name}, la tua Dashboard`}
                   </Link>
                 </NavLink>
             )}
@@ -75,11 +75,11 @@ const Header = (props) => {
                 </NavLink>
             )}
           {isAuth() && (
-                <NavLink style={{ cursor: "pointer" }} onClick={() =>  signout(() => Router.replace('/signin')) }>
+                <NavLink style={{ cursor: "pointer", color: "#fff" }} onClick={() =>  signout(() => Router.replace('/signin')) }>
                       Logout
                 </NavLink>
             )}
-          <NavbarText>THE-BLOG</NavbarText>
+          <NavbarText style={{ cursor: "pointer", color: "#fff" }}>THE-BLOG</NavbarText>
         </Collapse>
       </Navbar>
     </div>

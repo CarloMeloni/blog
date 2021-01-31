@@ -4,10 +4,8 @@ import Link from 'next/link';
 const index = () => {
     return (
         <Layout>
-        <h2 className="display-3 text-center">PAGINA PRINCIPALE</h2>
-        <Link href="/signup">
-            <a>Registrati!</a>
-        </Link>
+        <h2 className="display-3 text-center">PAGINA PRINCIPALE DEL BLOG</h2>
+        <img src="/static/images/newspaper.jpg" />
     </Layout>
     )
 
