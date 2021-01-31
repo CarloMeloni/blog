@@ -107,10 +107,10 @@ exports.create = (req, res) => {
 
 exports.list = (req, res) => {
     Blog.find({})
-        .populate('categories', '_id name slug')
-        .populate('tags', '_id name slug')
-        .populate('postedBy', '_id name username')
-        .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
+    .populate('categories', '_id name slug')
+    .populate('tags', '_id name slug')
+    .populate('postedBy', '_id name username')
+    .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
         .exec((err, data) => {
             if(err) {
                 return res.json({
@@ -135,7 +135,7 @@ exports.listAllBlogCategoriesTags = (req, res) => {
         .sort({createdAt: -1})
         .skip(skip)
         .limit(limit)
-        .select('_id title excerpt categories tags postedBy createdAt updatedAt')
+        .select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
         .exec((err, data) => {
             if(err) {
                 return res.json({
@@ -269,15 +269,15 @@ exports.update = (req, res) => {
 
 exports.photo = (req, res) => {
     const slug = req.params.slug.toLowerCase();
-    Blog.findOne({slug})
+    Blog.findOne({ slug })
         .select('photo')
         .exec((err, blog) => {
-            if(err || !blog) {
+            if (err || !blog) {
                 return res.status(400).json({
                     error: errorHandler(err)
-                })
+                });
             }
             res.set('Content-Type', blog.photo.contentType);
             return res.send(blog.photo.data);
-        })
+        });
 };

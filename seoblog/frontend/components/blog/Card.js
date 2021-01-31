@@ -30,7 +30,7 @@ const Card = ({blog}) => {
                 </header>
                 <section>
                     <p className="mark pt-2 pb-2">
-                        Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')}
+                        Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')} alle {moment(blog.updatedAt).format('HH:mm')}
                     </p>
                 </section>
                 <section>
@@ -40,7 +40,15 @@ const Card = ({blog}) => {
                     <br />
                 </section>
                 <div className="row">
-                    <div className="col-md-4">image</div>
+                    <div className="col-md-4">
+                        <section>
+                            <img 
+                                className="img img-fluid" 
+                                style={{maxHeight: "150px", width: "auto"}} 
+                                src={`${API}/blog/photo/${blog.slug}`} 
+                                alt={blog.title} />
+                        </section>
+                    </div>
                     <div className="col-md-8">
                         <section>
                             <div className="pb-3">{blog.excerpt == undefined ? '' : renderHtml(blog.excerpt)}</div>
