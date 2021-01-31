@@ -7,6 +7,7 @@ import Card from '../../components/blog/Card';
 
 
 const Blogs = ({blogs, categories, tags, size}) => {
+
     const showAllBlogs = () => {
         return blogs.map((blog, idx) => {
              return (
@@ -16,6 +17,27 @@ const Blogs = ({blogs, categories, tags, size}) => {
             )
         });
     }
+
+    const showAllCategories = () => {
+        return categories.map((cat, idx) => {
+            return (
+                <Link key={idx} href={`categories/${cat.slug}`}>
+                    <a className="btn btn-primary mr-1 ml-1 mt-3">{cat.name}</a>
+                </Link>
+            )
+        });
+    };
+
+    const showAllTags = () => {
+        return tags.map((tag, idx) => {
+            return (
+                <Link key={idx} href={`tags/${tag.slug}`}>
+                    <a className="btn btn-warning mr-1 ml-1 mt-3">{tag.name}</a>
+                </Link>
+            )
+        });
+    };
+    
     return (
         <Layout>
             <main>
@@ -25,7 +47,11 @@ const Blogs = ({blogs, categories, tags, size}) => {
                             <h1 className="display-4 font-weight-bold text-center">Articoli</h1>
                         </div>
                         <section>
-                            <p>Categorie e tag</p>
+                            <div className="pb-5 text-center">
+                                {showAllCategories()}
+                                <br/>
+                                {showAllTags()}
+                            </div>
                         </section>
                     </header>
                 </div>
