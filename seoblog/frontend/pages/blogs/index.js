@@ -47,7 +47,7 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
         return (
             size > 0 &&
             size >= limit && (
-                <button style={{backgroundColor: 'black'}} onClick={loadMore} className="btn btn-outline-primary btn-lg">
+                <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
                     Altri articoli
                 </button>
             )
