@@ -170,6 +170,7 @@ const BlogCreate = ({ router }) => {
 
                 <div className="form-group">
                     <ReactQuill 
+                        style={{backgroundColor: "#fff"}}
                         modules={CreateBlog.modules} 
                         formats={CreateBlog.formats} 
                         value={body} 
@@ -182,7 +183,6 @@ const BlogCreate = ({ router }) => {
                 </div>
             </form>
         )
-        
     }
 
     return (

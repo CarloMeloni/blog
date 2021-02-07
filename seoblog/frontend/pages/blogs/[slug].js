@@ -85,7 +85,7 @@ const SingleBlog = ({blog, query}) => {
                                 </section>
                                 <section>
                                     <div className="container">
-                                        <h2 className="display-3 pb-3 pt-3 text-center font-weight-bold">{blog.title}</h2>
+                                        <h2 className="display-4 pb-3 pt-3 text-center font-weight-bold">{blog.title}</h2>
                                         <p className="lead mt-3 font-weight-bold">
                                             Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')} alle {moment(blog.updatedAt).format('HH:mm')}
                                         </p>
@@ -102,7 +102,7 @@ const SingleBlog = ({blog, query}) => {
 
                         <div className="container">
                             <section>
-                                <div className="col-md-12 lead">{renderHtml(blog.body)}</div>
+                                <div style={{backgroundColor: "#ffec96"}} className="col-md-12 lead">{renderHtml(blog.body)}</div>
                             </section>
                         </div>
 
