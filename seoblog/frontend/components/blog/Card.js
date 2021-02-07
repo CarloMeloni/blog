@@ -7,7 +7,7 @@ const Card = ({blog}) => {
     const showBlogCategories = (blog) => {
         return blog.categories.map((cat, idx) => (
             <Link key={idx} href={`/categories/${cat.slug}`}>
-                <a className="btn btn-outline-primary mr-1 ml-1 mt-3">{cat.name}</a>
+                <a className="btn btn-outline-danger mr-1 ml-1 mt-3">{cat.name}</a>
             </Link>
         ));
     };
@@ -15,7 +15,7 @@ const Card = ({blog}) => {
     const showBlogTags = (blog) => {
         return blog.tags.map((tag, idx) => (
             <Link key={idx} href={`/tags/${tag.slug}`}>
-                <a className="btn btn-outline-warning mr-1 ml-1 mt-3">{tag.name}</a>
+                <a className="btn btn-warning mr-1 ml-1 mt-3">{tag.name}</a>
             </Link>
         ));
     };
@@ -53,7 +53,7 @@ const Card = ({blog}) => {
                         <section>
                             <div className="pb-3">{blog.excerpt == undefined ? '' : renderHtml(blog.excerpt)}</div>
                             <Link href={`/blogs/${blog.slug}`}>
-                                <a className="btn btn-primary pt-2">Leggi l'articolo</a>
+                                <a className="btn btn-danger pt-2">Leggi l'articolo</a>
                             </Link>
                         </section>
                     </div>

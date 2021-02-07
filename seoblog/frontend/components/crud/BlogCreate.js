@@ -178,7 +178,7 @@ const BlogCreate = ({ router }) => {
                 </div>
 
                 <div>
-                    <button className="btn btn-primary">Pubblica</button>
+                    <button className="btn btn-danger">Pubblica</button>
                 </div>
             </form>
         )
@@ -201,7 +201,7 @@ const BlogCreate = ({ router }) => {
                             <h5>Photo</h5>
                             <hr/>
                             <small className="text-muted">Dimensioni max: 1mb</small>
-                            <label className="btn btn-outline-info m-3">Carica Immagine
+                            <label className="btn btn-outline-danger m-3">Carica Immagine
                                 <input onChange={handleChange('photo')} type="file" accept="image/*" hidden />
                             </label>
                         </div>

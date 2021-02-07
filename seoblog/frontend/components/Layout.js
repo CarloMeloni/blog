@@ -3,16 +3,16 @@ import Header from './Header';
 
 const Layout = ({ children }) => {
     return (
-        <React.Fragment>
+        <div className="layout-background">
             <div>
             <Header />
                 {children}
             </div>
-            <div style={{ }} className="col-md-12">
-                <p className="display-3 text-center">BLOG</p>
+            <div className="col-md-12">
+                <p className="display-3 text-center">BLOG - contatti</p>
             </div>
             
-        </React.Fragment>
+        </div>
     )
 }
 

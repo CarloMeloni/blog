@@ -45,7 +45,7 @@ const SingleBlog = ({blog, query}) => {
     const showBlogCategories = (blog) => {
         return blog.categories.map((cat, idx) => (
             <Link key={idx} href={`/categories/${cat.slug}`}>
-                <a className="btn btn-outline-primary mr-1 ml-1 mt-3">{cat.name}</a>
+                <a className="btn btn-outline-danger mr-1 ml-1 mt-3">{cat.name}</a>
             </Link>
         ));
     };
@@ -53,7 +53,7 @@ const SingleBlog = ({blog, query}) => {
     const showBlogTags = (blog) => {
         return blog.tags.map((tag, idx) => (
             <Link key={idx} href={`/tags/${tag.slug}`}>
-                <a className="btn btn-outline-warning mr-1 ml-1 mt-3">{tag.name}</a>
+                <a className="btn btn-warning mr-1 ml-1 mt-3">{tag.name}</a>
             </Link>
         ));
     };
@@ -85,7 +85,7 @@ const SingleBlog = ({blog, query}) => {
                                 </section>
                                 <section>
                                     <div className="container">
-                                        <h1 className="display-2 pb-3 pt-3 text-center font-weight-bold">{blog.title}</h1>
+                                        <h2 className="display-3 pb-3 pt-3 text-center font-weight-bold">{blog.title}</h2>
                                         <p className="lead mt-3 font-weight-bold">
                                             Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')} alle {moment(blog.updatedAt).format('HH:mm')}
                                         </p>

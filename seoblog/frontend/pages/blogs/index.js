@@ -51,7 +51,7 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
         return (
             size > 0 &&
             size >= limit && (
-                <button onClick={loadMore} className="btn btn-outline-primary btn-lg">
+                <button onClick={loadMore} className="btn btn-outline-danger btn-lg">
                     Altri articoli
                 </button>
             )
@@ -72,7 +72,7 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
         return categories.map((cat, idx) => {
             return (
                 <Link key={idx} href={`categories/${cat.slug}`}>
-                    <a className="btn btn-primary mr-1 ml-1 mt-3">{cat.name}</a>
+                    <a className="btn btn-danger mr-1 ml-1 mt-3">{cat.name}</a>
                 </Link>
             )
         });

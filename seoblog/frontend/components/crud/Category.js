@@ -46,7 +46,7 @@ const Category = () => {
                         onDoubleClick={() => deleteConfirm(c.slug)}
                         title="Doppio click per eliminarla" 
                         key={i} 
-                        className="btn btn-outline-primary mr-1 ml-1 mt-3">
+                        className="btn btn-outline-danger mr-1 ml-1 mt-3">
                             {c.name}
                     </button>
         })
@@ -115,7 +115,7 @@ const Category = () => {
                 <input type="text" className="form-control" onChange={handleChange} value={name} required />
             </div>
             <div>
-                <button type="submit" className="btn btn-primary">Crea</button>
+                <button type="submit" className="btn btn-danger">Crea</button>
             </div>
         </form>
     )

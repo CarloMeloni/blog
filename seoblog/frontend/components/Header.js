@@ -62,15 +62,19 @@ const Header = (props) => {
             )}
             {isAuth() && isAuth().role === 0 && (
                 <NavLink>
-                  <Link style={{ cursor: "pointer", color: "#fff" }} href='/user'>
-                    {`${isAuth().name}, la tua Dashboard`}
+                  <Link href='/user'>
+                    <a style={{ color: "#FFEC96"}}>
+                      {`${isAuth().name}, la tua Dashboard`}
+                    </a>
                   </Link>
                 </NavLink>
             )}
             {isAuth() && isAuth().role === 1 && (
                 <NavLink>
-                  <Link href='/admin'>
-                    {`${isAuth().name}, la tua Dashboard.`}
+                  <Link style={{ cursor: "pointer" }} href='/admin'>
+                    <a style={{ color: "#FFEC96"}}>
+                      {`${isAuth().name}, la tua Dashboard`}
+                    </a>
                   </Link>
                 </NavLink>
             )}
