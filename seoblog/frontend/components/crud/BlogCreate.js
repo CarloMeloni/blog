@@ -188,17 +188,17 @@ const BlogCreate = ({ router }) => {
     return (
         <div className="container-fluid pb-5">
             <div className="row">
-                <div className="col-8">
+                <div className="col-md-8">
                     {createBlogForm()}
                     <div className="pt-3">
                         {showError()}
                         {showSuccess()}
                     </div>
                 </div>
-                <div className="col-4">
+                <div className="col-md-4">
                     <div>
                         <div className="form-group pb-2">
-                            <h5>Photo</h5>
+                            <h5>Immagine Articolo</h5>
                             <hr/>
                             <small className="text-muted">Dimensioni max: 1mb</small>
                             <label className="btn btn-outline-danger m-3">Carica Immagine
