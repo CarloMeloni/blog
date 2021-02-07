@@ -4,7 +4,7 @@ import Header from './Header';
 const Layout = ({ children }) => {
     return (
         <React.Fragment>
-            <div style={{backgroundColor: '#ccc'}}>
+            <div>
             <Header />
                 {children}
             </div>

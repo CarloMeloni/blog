@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {withRouter} from 'next/router';
@@ -14,7 +14,7 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
             <title>THE BLOG | {APP_NAME}</title>
             <meta name="description" content="Blog contenuti tecnologia satira costume arte italian" />
             <link rel="canonical" href={`${DOMAIN}${router.pathname}`} />
-            <meta property="og:title" content={`Questo blog puo' contenere tecnologia, satira, costume, arte, coloranti e conservanti | ${APP_NAME}`} />
+            <meta property="og:title" content={`Questo blog puo' contenere tecnologia, satira, costume, coloranti e conservanti | ${APP_NAME}`} />
             <meta property="og:description" content="Blog contenuti tecnologia satira costume arte italian" />
             <meta property="og:type" content="website" />
             <meta property="og:url" content={`${DOMAIN}${router.pathname}`} />
@@ -29,6 +29,10 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
     const [skip, setSkip] = useState(0);
     const [size, setSize] = useState(totalBlogs);
     const [loadedBlogs, setLoadedBlogs] = useState([]);
+
+    useEffect(() => {
+        //getInitialProps();
+    }, []);
 
     const loadMore = () => {
         let toSkip = skip + limit;
@@ -130,7 +134,7 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
 
 Blogs.getInitialProps = () => {
     let skip = 0;
-    let limit = 5;
+    let limit = 10;
     return listBlogsWithCategoriesAndTags(skip, limit).then(data => {
         if(data.error) {
             console.log(data.error);

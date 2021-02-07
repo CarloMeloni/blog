@@ -1,14 +1,31 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import {withRouter} from 'next/router';
 import Layout from '../../components/Layout';
-import {singleBlog} from '../../actions/blog';
+import {singleBlog, listRelated} from '../../actions/blog';
 import {API, DOMAIN, APP_NAME} from '../../config';
 import renderHtml from 'react-render-html';
 import moment from 'moment';
+import SmallCard from '../../components/blog/SmallCard';
 
 const SingleBlog = ({blog, query}) => {
+    const [related, setRelated] = useState([]);
+
+    const loadRelated = () => {
+        listRelated({blog}).then((data) => {
+            if(data.error) {
+                console.log(data.error);
+            } else {
+                setRelated(data);
+            }
+        });
+    } ;
+
+    useEffect(() => {
+        loadRelated();
+    }, []);
+
     const showHead = () => (
         <Head>
             <title>{blog.title} | {APP_NAME}</title>
@@ -39,6 +56,18 @@ const SingleBlog = ({blog, query}) => {
                 <a className="btn btn-outline-warning mr-1 ml-1 mt-3">{tag.name}</a>
             </Link>
         ));
+    };
+
+    const showRelatedBlogs = () => {
+        return related.map((blog, idx) => {
+            return (
+                <div className="col-md-4" key={idx}>
+                    <article>
+                        <SmallCard blog={blog} />
+                    </article>
+                </div>
+            )
+        });
     };
 
     return (
@@ -80,7 +109,9 @@ const SingleBlog = ({blog, query}) => {
                         <div className="container pb-5">
                             <h4 className="text-center pt-5 pb-5">Articoli correlati</h4>
                             <hr/>
-                            <p>Mostra gli articoli simili a questo</p>
+                            <div className="row">
+                                {showRelatedBlogs()}
+                            </div>
                         </div>
 
                         <div className="container pb-5">
