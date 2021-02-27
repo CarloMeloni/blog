@@ -64,7 +64,7 @@ const Header = (props) => {
                 <NavLink>
                   <Link href='/user'>
                     <a style={{ color: "#FFEC96"}}>
-                      {`${isAuth().name}, la tua Dashboard`}
+                      {isAuth().name}
                     </a>
                   </Link>
                 </NavLink>
@@ -73,7 +73,7 @@ const Header = (props) => {
                 <NavLink>
                   <Link style={{ cursor: "pointer" }} href='/admin'>
                     <a style={{ color: "#FFEC96"}}>
-                      {`${isAuth().name}, la tua Dashboard`}
+                      {isAuth().name}
                     </a>
                   </Link>
                 </NavLink>

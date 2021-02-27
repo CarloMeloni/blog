@@ -28,7 +28,7 @@ const BlogUpdate = ({router}) => {
 
 
     useEffect(() => {
-        setValues({ ...values, formData: new FormData() });
+        setValues({ ...values, formData: new FormData(),  });
         initBlog();
     }, [router]);
 

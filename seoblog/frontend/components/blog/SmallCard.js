@@ -6,7 +6,7 @@ import moment from 'moment';
 const SmallCard = ({blog}) => {
 
     return (
-            <div className="card">
+            <div className="card" style={{ border: "3px solid #ffec96", borderRadius: "30px"}}>
                 <section>
                     <Link href={`/blogs/${blog.slug}`}>
                         <a>

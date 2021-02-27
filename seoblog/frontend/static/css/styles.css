@@ -3,6 +3,11 @@
   text-decoration: none !important;
 }
 
+::selection {
+  background-color: #440501;
+  color: #fff;
+}
+
 a,
 p,
 h1,
