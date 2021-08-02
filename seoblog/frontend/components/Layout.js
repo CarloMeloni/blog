@@ -8,9 +8,6 @@ const Layout = ({ children }) => {
             <Header />
                 {children}
             </div>
-            <div className="col-md-12">
-                <p className="display-3 text-center">BLOG - contatti</p>
-            </div>
             
         </div>
     )
