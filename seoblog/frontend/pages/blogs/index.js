@@ -1,14 +1,14 @@
-import {useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import {withRouter} from 'next/router';
+import { withRouter } from 'next/router';
 import Layout from '../../components/Layout';
-import {listBlogsWithCategoriesAndTags} from '../../actions/blog';
+import { listBlogsWithCategoriesAndTags } from '../../actions/blog';
 import Card from '../../components/blog/Card';
-import {API, DOMAIN, APP_NAME} from '../../config';
+import { API, DOMAIN, APP_NAME } from '../../config';
 
 
-const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, router}) => {
+const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, router }) => {
     const showHead = () => (
         <Head>
             <title>THE BLOG | {APP_NAME}</title>
@@ -60,7 +60,7 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
 
     const showAllBlogs = () => {
         return blogs.map((blog, idx) => {
-             return (
+            return (
                 <article key={idx}>
                     <Card blog={blog} />
                 </article>
@@ -91,43 +91,43 @@ const Blogs = ({blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, route
     const showLoadedBlogs = () => {
         return loadedBlogs.map((blog, idx) => {
             return (
-               <article key={idx}>
-                   <Card blog={blog} />
-               </article>
-           )
-       });
+                <article key={idx}>
+                    <Card blog={blog} />
+                </article>
+            )
+        });
     }
-    
+
     return (
         <>
-        {showHead()}
-        <Layout>
-            <main>
-                <div className="container-fluid">
-                    <header>
-                        <div className="col-md-12 pt-3">
-                            <h1 className="display-4 font-weight-bold text-center">Articoli</h1>
-                        </div>
-                        <section>
-                            <div className="pb-5 text-center">
-                                {showAllCategories()}
-                                <br/>
-                                {showAllTags()}
+            {showHead()}
+            <Layout>
+                <main>
+                    <div className="container-fluid">
+                        <header>
+                            <div className="col-md-12 pt-3">
+                                <h1 className="display-4 font-weight-bold text-center">Articoli</h1>
                             </div>
-                        </section>
-                    </header>
-                </div>
-                <div className="container-fluid">
-                    {showAllBlogs()}
-                </div>
-                <div className="container-fluid">
-                    {showLoadedBlogs()}
-                </div>
-                <div className="text-center pt-5 pb-5">
-                    {loadMoreButton()}
-                </div>
-            </main>
-        </Layout>
+                            <section>
+                                <div className="pb-5 text-center">
+                                    {showAllCategories()}
+                                    <br />
+                                    {showAllTags()}
+                                </div>
+                            </section>
+                        </header>
+                    </div>
+                    <div className="container-fluid">
+                        {showAllBlogs()}
+                    </div>
+                    <div className="container-fluid">
+                        {showLoadedBlogs()}
+                    </div>
+                    <div className="text-center pt-5 pb-5">
+                        {loadMoreButton()}
+                    </div>
+                </main>
+            </Layout>
         </>
     )
 };
@@ -136,7 +136,7 @@ Blogs.getInitialProps = () => {
     let skip = 0;
     let limit = 10;
     return listBlogsWithCategoriesAndTags(skip, limit).then(data => {
-        if(data.error) {
+        if (data.error) {
             console.log(data.error);
         } else {
             return {

@@ -9,6 +9,7 @@ import { getTags } from '../../actions/tag';
 import { singleBlog, updateBlog } from '../../actions/blog';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import '../../node_modules/react-quill/dist/quill.snow.css';
+import {API} from '../../config';
 
 const BlogUpdate = ({ router }) => {
     const [body, setBody] = useState('');
@@ -31,6 +32,8 @@ const BlogUpdate = ({ router }) => {
         success,
         formData,
     } = values;
+
+    const token = getCookie('token');
 
 
     useEffect(() => {
@@ -178,8 +181,20 @@ const BlogUpdate = ({ router }) => {
         formData.set('body', e);
     };
 
-    const editBlog = () => {
-        console.log('Updated blog!!')
+    const editBlog = (e) => {
+        e.preventDefault();
+        updateBlog(formData, token, router.query.slug).then(data => {
+            if(data.error) {
+                setValues({ ...values, error: data.error })
+            } else {
+                setValues({ ...values, title: '', success: `L'articolo titolato "${data.title}" e' stato aggiornato con successo!` })
+                if(isAuth() && isAuth().role === 1) {
+                    Router.replace(`/admin`)
+                } else if(isAuth() && isAuth().role === 0) {
+                    Router.replace(`/user`)
+                }
+            }
+        })
     };
 
     const handleChange = name => e => {
@@ -188,6 +203,18 @@ const BlogUpdate = ({ router }) => {
         formData.set(name, value);
         setValues({ ...values, [name]: value, formData, error: '' })
     }
+
+    const showError = () => (
+        <div className="alert alert-danger" style={{display: error ? '' : 'none'}}>
+            {error}
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className="alert alert-success" style={{display: success ? '' : 'none'}}>
+            {success}
+        </div>
+    );
 
     const updateBlogForm = () => {
         return (
@@ -220,8 +247,10 @@ const BlogUpdate = ({ router }) => {
                 <div className="col-8">
                     {updateBlogForm()}
                     <div className="pt-3">
-                        <p>Success or error message</p>
+                        {showSuccess()}
+                        {showError()}
                     </div>
+                    {body && (<img src={`${API}/blog/photo/${router.query.slug}`} alt={title} style={{width: '100%'}}/>)}
                 </div>
                 <div className="col-md-4">
                     <div>
