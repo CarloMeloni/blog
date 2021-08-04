@@ -51,7 +51,7 @@ const Card = ({blog}) => {
                     </div>
                     <div className="col-md-8">
                         <section>
-                            <div style={{backgroundColor: "#ffec96"}} className="pb-3">{blog.excerpt == undefined ? '' : renderHtml(blog.excerpt)}</div>
+                            <div style={{backgroundColor: "#fff"}} className="pb-3">{blog.excerpt == undefined ? '' : renderHtml(blog.excerpt)}</div>
                             <Link href={`/blogs/${blog.slug}`}>
                                 <a className="btn btn-danger pt-2">Leggi l'articolo</a>
                             </Link>

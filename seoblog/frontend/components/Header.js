@@ -64,7 +64,7 @@ const Header = (props) => {
             {isAuth() && isAuth().role === 0 && (
                 <NavLink>
                   <Link href='/user'>
-                    <a style={{ color: "#FFEC96"}}>
+                    <a style={{ color: "#178DB3"}}>
                       {isAuth().name}
                     </a>
                   </Link>
