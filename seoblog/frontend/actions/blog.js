@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
-import { getJSON } from 'js-cookie';
 import { API } from '../config';
+import queryString from 'query-string'
 
 export const createBlog = (blog, token) => {
     return fetch(`${API}/blog`, {
@@ -104,3 +104,18 @@ export const updateBlog = (blog, token, slug) => {
     })
     .catch(err => console.log(err) )
 }
+
+export const listSearch = (params) => {
+    console.log('params', params)
+    let query = queryString.stringify(params);
+    console.log('query', query)
+    return fetch(`${API}/blogs/search?${query}`, {
+        method: 'GET'
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(err => {
+        console.log(err);
+    })
+};

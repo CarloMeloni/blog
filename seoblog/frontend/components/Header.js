@@ -19,6 +19,7 @@ import {
   NavbarText
 } from 'reactstrap';
 import '../node_modules/nprogress/nprogress.css';
+import Search from './blog/Search';
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
@@ -30,7 +31,7 @@ const Header = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
+    <>
       <Navbar color="dark" light expand="md">
         <Link href="/">
             <NavLink style={{ cursor: "pointer", color: "#fff" }} className="font-weight-bold">
@@ -86,7 +87,8 @@ const Header = (props) => {
           <NavbarText style={{ cursor: "pointer", color: "#fff" }}>THE-BLOG</NavbarText>
         </Collapse>
       </Navbar>
-    </div>
+      <Search />
+    </>
   );
 }
 
