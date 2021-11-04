@@ -32,7 +32,7 @@ const Search = () => {
                 {results.map((b, i) => {
                     return (<div key={i}>
                         <Link href={`blogs/${b.slug}`}>
-                            <a className="text-primary">{b.title}</a>
+                            <a className="text-primary">~ {b.title}</a>
                         </Link>
                     </div>)
                 })}

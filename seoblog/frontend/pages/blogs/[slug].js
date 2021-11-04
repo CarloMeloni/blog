@@ -102,7 +102,7 @@ const SingleBlog = ({blog, query}) => {
 
                         <div className="container">
                             <section>
-                                <div style={{backgroundColor: "#ffec96"}} className="col-md-12 lead">{renderHtml(blog.body)}</div>
+                                <div style={{backgroundColor: "#fff"}} className="col-md-12 lead">{renderHtml(blog.body)}</div>
                             </section>
                         </div>
 
