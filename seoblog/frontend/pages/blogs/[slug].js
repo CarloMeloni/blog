@@ -87,7 +87,7 @@ const SingleBlog = ({blog, query}) => {
                                     <div className="container">
                                         <h2 className="display-4 pb-3 pt-3 text-center font-weight-bold">{blog.title}</h2>
                                         <p className="lead mt-3 font-weight-bold">
-                                            Scritto da {blog.postedBy.name} | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')} alle {moment(blog.updatedAt).format('HH:mm')}
+                                            Scritto da <Link href={`/profile/${blog.postedBy.username}`}><a>{blog.postedBy.username}</a></Link> | Pubblicato il {moment(blog.updatedAt).format('DD-MM-YYYY')} alle {moment(blog.updatedAt).format('HH:mm')}
                                         </p>
                                         <div className="pb-3">
                                             {showBlogCategories(blog)}

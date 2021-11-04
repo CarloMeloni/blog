@@ -31,9 +31,10 @@ const Search = () => {
                 {message && <p className="pt-4 text-muted font-italic">{message}</p>}
                 {results.map((b, i) => {
                     return (<div key={i}>
-                        <Link href={`blogs/${b.slug}`}>
+                        <Link href={`/blogs/${b.slug}`}>
                             <a className="text-primary">~ {b.title}</a>
                         </Link>
+                        <hr/>
                     </div>)
                 })}
             </div>

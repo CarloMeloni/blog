@@ -6,7 +6,7 @@ import moment from 'moment';
 const SmallCard = ({blog}) => {
 
     return (
-            <div className="card" style={{ border: "3px solid #ffec96", borderRadius: "30px"}}>
+            <div className="card" style={{ border: "3px solid #ccc", borderRadius: "30px"}}>
                 <section>
                     <Link href={`/blogs/${blog.slug}`}>
                         <a>
@@ -34,11 +34,7 @@ const SmallCard = ({blog}) => {
 
                 <div className="card-body">
                     Scritto il {moment(blog.updatedAt).format('DD-MM-YYYY')} da{' '}
-                    <Link href="/">
-                        <a>
-                            {blog.postedBy.name}
-                        </a>
-                    </Link>
+                    <Link href={`/profile/${blog.postedBy.username}`}><a>{blog.postedBy.username}</a></Link>
                 </div>
 
             </div>

@@ -28,8 +28,9 @@ const UserProfile = ({user, blogs, query}) => {
             return (
                 <div className="px-4" key={idx}>
                     <Link href={`/blogs/${blog.slug}`}>
-                        <a className="lead">{blog.title}</a>
+                        <a className="lead">~ {blog.title}</a>
                     </Link>
+                    <hr/>
                 </div>
             )
         })
