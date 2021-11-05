@@ -68,15 +68,15 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
         });
     }
 
-    const showAllCategories = () => {
-        return categories.map((cat, idx) => {
-            return (
-                <Link key={idx} href={`categories/${cat.slug}`}>
-                    <a className="btn btn-danger mr-1 ml-1 mt-3">{cat.name}</a>
-                </Link>
-            )
-        });
-    };
+    // const showAllCategories = () => {
+    //     return categories.map((cat, idx) => {
+    //         return (
+    //             <Link key={idx} href={`categories/${cat.slug}`}>
+    //                 <a className="btn btn-danger mr-1 ml-1 mt-3">{cat.name}</a>
+    //             </Link>
+    //         )
+    //     });
+    // };
 
     const showAllTags = () => {
         return tags.map((tag, idx) => {
@@ -110,7 +110,7 @@ const Blogs = ({ blogs, categories, tags, totalBlogs, blogsLimit, blogSkip, rout
                             </div>
                             <section>
                                 <div className="pb-5 text-center">
-                                    {showAllCategories()}
+                                    {/* {showAllCategories()} */}
                                     <br />
                                     {showAllTags()}
                                 </div>
