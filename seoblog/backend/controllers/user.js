@@ -56,23 +56,24 @@ exports.update = (req, res) => {
         let user = req.profile;
         user = _.extend(user, fields);
         if(files.photo) {
-            if(files.photo.size > 1000000) {
+            if(files.photo.size > 3000000) {
                 return res.status(400).json({
                     error: "L'immagine deve essere inferiore a un megabyte."
                 })
             }
             user.photo.data = fs.readFileSync(files.photo.path);
             user.photo.type = files.photo.type;
-            user.save((err, result) => {
-                if(err) {
-                    return res.status(400).json({
-                        error: errorHandler(err)
-                    })
-                }
-                user.hashed_password = undefined;
-                res.json(user);
-            })
         }
+        
+        user.save((err, result) => {
+            if(err) {
+                return res.status(400).json({
+                    error: errorHandler(err)
+                })
+            }
+            user.hashed_password = undefined;
+            res.json(user);
+        })
     })
 }
 
