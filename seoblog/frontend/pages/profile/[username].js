@@ -45,9 +45,20 @@ const UserProfile = ({user, blogs, query}) => {
                         <div className="col-md-12">
                             <div className="card">
                                 <div className="card-body">
-                                    <h5>{user.name}</h5>
-                                    <Link href={`${user.profile}`}><a>Visita il profilo</a></Link>
-                                    <p className="text-muted">Membro dal {moment(user.createdAt).format('DD/MM/YYYY')}</p>
+                                    <div class="row">
+                                        <div className="col-md-8">
+                                            <h5>{user.name}</h5>
+                                            <p className="text-muted">Membro dal {moment(user.createdAt).format('DD/MM/YYYY')}</p>
+                                        </div>
+                                        <div className="col-md-4">
+                                            <img 
+                                                src={`${API}/user/photo/${user.username}`}
+                                                className="img img-fluid img-thumbnail mb-3"
+                                                style={{maxHeight: 'auto', maxWidth: '100%'}}
+                                                alt="Profilo utente"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

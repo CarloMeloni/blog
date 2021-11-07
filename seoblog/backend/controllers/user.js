@@ -47,6 +47,7 @@ exports.publicProfile = (req, res) => {
 
 exports.update = (req, res) => {
     let form = new formidable.IncomingForm();
+    form.keepExtension = true;
     form.parse(req, (err, fields, files) => {
         if(err) {
             return res.status(400).json({
@@ -55,6 +56,13 @@ exports.update = (req, res) => {
         }
         let user = req.profile;
         user = _.extend(user, fields);
+
+        if(fields.password && fields.password.length < 6) {
+            return res.status(400).json({
+                error: 'La password deve avere almeno 6 caratteri.'
+            })
+        }
+
         if(files.photo) {
             if(files.photo.size > 3000000) {
                 return res.status(400).json({
@@ -64,7 +72,7 @@ exports.update = (req, res) => {
             user.photo.data = fs.readFileSync(files.photo.path);
             user.photo.type = files.photo.type;
         }
-        
+
         user.save((err, result) => {
             if(err) {
                 return res.status(400).json({

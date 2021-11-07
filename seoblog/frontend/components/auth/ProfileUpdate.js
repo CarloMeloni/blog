@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { API } from '../../config';
 import Router from 'next/router';
 import {getCookie, isAuth} from '../../actions/auth';
 import {getProfile, update} from '../../actions/user';
@@ -61,7 +62,6 @@ const ProfileUpdate = () => {
                     email: data.email,
                     about: data.about,
                     success: true,
-                    error: false,
                     loading: false
                 })
             }
@@ -101,12 +101,36 @@ const ProfileUpdate = () => {
         </form>
     );
 
+    const showError = () => (
+        <div style={{display: error ? 'block' : 'none'}} className=" m-4 alert alert-danger">Tutti i campi sono richiesti (ad eccezione della password, solamente se la vuoi cambiare).</div>
+    )
+
+    const showSuccess = () => (
+        <div style={{display: success ? 'block' : 'none'}} className=" m-4 alert alert-success">Profilo aggiornato.</div>
+    )
+
+    const showLoading = () => (
+        <div style={{display: loading ? 'block' : 'none'}} className=" m-4 alert alert-info">Caricamento</div>
+    )
+
     return (
         <>
             <div className="container">
                 <div className="row">
-                    <div className="col-md-4">IMAGE</div>
-                    <div className="col-md-8">{profileUpdateForm()}</div>
+                    <div className="col-md-4">
+                        <img 
+                            src={`${API}/user/photo/${username}`}
+                            className="img img-fluid img-thumbnail mb-3"
+                            style={{maxHeight: 'auto', maxWidth: '100%'}}
+                            alt="Profilo utente"
+                        />
+                    </div>
+                    <div className="col-md-8">
+                        {showError()}
+                        {showSuccess()}
+                        {showLoading()}
+                        {profileUpdateForm()}
+                    </div>
                 </div>
             </div>
         </>
