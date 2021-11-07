@@ -84,6 +84,11 @@ const Header = (props) => {
                       Logout
                 </NavLink>
             )}
+            <Link href="/user/crud/blog">
+                <NavLink className="btn btn-danger m-2" style={{ cursor: "pointer"}}>
+                    Pubblica un articolo
+                </NavLink>
+            </Link>
           <NavbarText style={{ cursor: "pointer", color: "#fff" }}>THE-BLOG</NavbarText>
         </Collapse>
       </Navbar>
