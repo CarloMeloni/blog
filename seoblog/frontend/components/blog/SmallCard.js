@@ -6,13 +6,13 @@ import moment from 'moment';
 const SmallCard = ({blog}) => {
 
     return (
-            <div className="card" style={{ border: "3px solid #ccc", borderRadius: "30px", maxHeight: "40rem"}}>
+            <div className="card" style={{ border: "1px solid #ccc", borderRadius: "15px", height: "30rem"}}>
                 <section>
                     <Link href={`/blogs/${blog.slug}`}>
                         <a>
                         <img 
                             className="img img-fluid" 
-                            style={{maxHeight: "auto", width: "100%"}} 
+                            style={{height: "250", width: "100%"}} 
                             src={`${API}/blog/photo/${blog.slug}`} 
                             alt={blog.title} />
                         </a>
