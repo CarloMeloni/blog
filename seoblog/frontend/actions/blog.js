@@ -72,8 +72,16 @@ export const listRelated = (blog) => {
     .catch(err => console.log(err) )
 };
 
-export const list = () => {
-    return fetch(`${API}/blogs`, {
+export const list = (username) => {
+    let listBlogsEndopint;
+
+    if(username) {
+        listBlogsEndopint = `${API}/${username}/blogs`
+    } else {
+        listBlogsEndopint = `${API}/blogs`
+    }
+
+    return fetch(`${listBlogsEndopint}`, {
         method: 'GET'
     })
     .then(response => {
@@ -85,7 +93,15 @@ export const list = () => {
 };
 
 export const removeBlog = (slug, token) => {
-    return fetch(`${API}/blog/${slug}`, {
+    let deleteBlogEndopint;
+
+    if(isAuth() && isAuth().role == 1) {
+        deleteBlogEndopint = `${API}/blog/${slug}`
+    } else if(isAuth() && isAuth().role == 0) {
+        deleteBlogEndopint = `${API}/user/blog/${slug}`
+    }
+
+    return fetch(`${deleteBlogEndopint}`, {
         method: 'DELETE',
         headers: {
             Accept: 'application/json',
@@ -100,7 +116,14 @@ export const removeBlog = (slug, token) => {
 };
 
 export const updateBlog = (blog, token, slug) => {
-    return fetch(`${API}/blog/${slug}`, {
+    let updateBlogEndopint;
+
+    if(isAuth() && isAuth().role == 1) {
+        updateBlogEndopint = `${API}/blog/${slug}`
+    } else if(isAuth() && isAuth().role == 0) {
+        updateBlogEndopint = `${API}/user/blog/${slug}`
+    }
+    return fetch(`${updateBlogEndopint}`, {
         method: 'PUT',
         headers: {
             Accept: 'application/json',
