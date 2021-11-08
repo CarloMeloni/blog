@@ -1,18 +1,18 @@
 import fetch from 'isomorphic-fetch';
 import { API } from '../config';
 import queryString from 'query-string'
-import {isAuth} from './auth';
+import {isAuth, handleResponse} from './auth';
 
 export const createBlog = (blog, token) => {
-    let createBlogEndopint;
+    let createBlogEndpoint;
 
     if(isAuth() && isAuth().role == 1) {
-        createBlogEndopint = `${API}/blog`
+        createBlogEndpoint = `${API}/blog`
     } else if(isAuth() && isAuth().role == 0) {
-        createBlogEndopint = `${API}/user/blog`
+        createBlogEndpoint = `${API}/user/blog`
     }
     
-    return fetch(`${createBlogEndopint}`, {
+    return fetch(`${createBlogEndpoint}`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -21,6 +21,7 @@ export const createBlog = (blog, token) => {
         body: blog
     })
     .then(res => {
+        handleResponse(res)
         return res.json();
     })
     .catch(err => console.log(err) )
@@ -73,18 +74,19 @@ export const listRelated = (blog) => {
 };
 
 export const list = (username) => {
-    let listBlogsEndopint;
+    let listBlogsEndpoint;
 
     if(username) {
-        listBlogsEndopint = `${API}/${username}/blogs`
+        listBlogsEndpoint = `${API}/${username}/blogs`
     } else {
-        listBlogsEndopint = `${API}/blogs`
+        listBlogsEndpoint = `${API}/blogs`
     }
 
-    return fetch(`${listBlogsEndopint}`, {
+    return fetch(`${listBlogsEndpoint}`, {
         method: 'GET'
     })
     .then(response => {
+        handleResponse(res)
         return response.json();
     })
     .catch(err => {
@@ -93,15 +95,15 @@ export const list = (username) => {
 };
 
 export const removeBlog = (slug, token) => {
-    let deleteBlogEndopint;
+    let deleteBlogEndpoint;
 
     if(isAuth() && isAuth().role == 1) {
-        deleteBlogEndopint = `${API}/blog/${slug}`
+        deleteBlogEndpoint = `${API}/blog/${slug}`
     } else if(isAuth() && isAuth().role == 0) {
-        deleteBlogEndopint = `${API}/user/blog/${slug}`
+        deleteBlogEndpoint = `${API}/user/blog/${slug}`
     }
 
-    return fetch(`${deleteBlogEndopint}`, {
+    return fetch(`${deleteBlogEndpoint}`, {
         method: 'DELETE',
         headers: {
             Accept: 'application/json',
@@ -110,6 +112,7 @@ export const removeBlog = (slug, token) => {
         },
     })
     .then(res => {
+        handleResponse(res)
         return res.json();
     })
     .catch(err => console.log(err) )

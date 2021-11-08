@@ -2,7 +2,7 @@ const User = require('../models/user');
 const shortId = require('shortid');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
-const blog = require('../models/blog');
+const Blog = require('../models/blog');
 const { errorHandler } = require('../helpers/dbErrorHandler');
 
 exports.signup = (req, res) => {
@@ -106,7 +106,7 @@ exports.adminMiddleware = (req, res, next) => {
 
 exports.canUpdateDeleteBlogs = (req, res, next) => {
     const slug = req.params.slug.toLowerCase();
-    blog.findOne({slug}).exec((err, data) => {
+    Blog.findOne({slug}).exec((err, data) => {
         if(err) {
             return res.status(400).json({
                 error: errorHandler(err)

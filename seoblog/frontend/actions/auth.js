@@ -1,6 +1,22 @@
 import fetch from 'isomorphic-fetch';
 import cookie, { remove } from 'js-cookie';
 import { API } from '../config';
+import Router from 'next/router';
+
+export const handleResponse = (response) => {
+    if(response.status === 401) {
+        signout(() => {
+            Router.push({
+                pathname: '/signin',
+                query: {
+                    message: "La sessione e' scaduta, per piacere rifai il login."
+                }
+            })
+        })
+    } else {
+        return;
+    }
+}
 
 export const signup = (user) => {
     return fetch(`${API}/signup`, {
