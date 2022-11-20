@@ -47,6 +47,11 @@ const Header = (props) => {
                         Articoli
                     </NavLink>
                 </Link>
+                <Link href="/contact">
+                    <NavLink style={{ cursor: "pointer", color: "#fff" }}>
+                        Contatti
+                    </NavLink>
+                </Link>
           {!isAuth() && (
               <>
                 <Link href="/signin">
