@@ -49,11 +49,14 @@ const Header = (props) => {
               Articoli
             </NavLink>
           </Link>
+          {/*
+          TO DO 
           <Link href="/contact">
             <NavLink style={{ cursor: "pointer", color: "#fff" }}>
-              Contatti
+              Contattaci
             </NavLink>
           </Link>
+          */}
           {!isAuth() && (
             <>
               <Link href="/signin">

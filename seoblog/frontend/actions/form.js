@@ -7,19 +7,18 @@ export const emailContactForm = (data) => {
   if (data.authorEmail) {
     emailEndPoint = `${API}/contact-blog-author`;
   } else {
-    emailEndPoint = `${API}/user/blog`;
+    emailEndPoint = `${API}/contact`;
   }
 
   return fetch(`${emailEndPoint}`, {
     method: "POST",
     headers: {
       Accept: "application/json",
-      "Content-Type": `application/json`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   })
     .then((res) => {
-      handleResponse(res);
       return res.json();
     })
     .catch((err) => console.log(err));
