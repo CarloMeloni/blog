@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const expressJwt = require("express-jwt");
 const Blog = require("../models/blog");
 const { errorHandler } = require("../helpers/dbErrorHandler");
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 exports.signup = (req, res) => {
   User.findOne({ email: req.body.email }).exec((err, user) => {
@@ -125,3 +127,21 @@ exports.canUpdateDeleteBlogs = (req, res, next) => {
     next();
   });
 };
+
+exports.forgotPassword = (req, res) => {
+  const {email} = req.body;
+  User.findOne({email}, (err, user) => {
+    if(err || !user) {
+      return res.status(401).json({
+        error: 'Questa email non esiste.'
+      })
+    }
+
+    const token = jwt.sign({_id: user.id}, process.env.JWT_RESET_PASSWORD, {expiresIn: '10m'});
+
+  })
+}
+
+exports.resetPassword = (req, res) => {
+  
+}
